@@ -26,7 +26,7 @@ Your 4 status images are the creative heart of the project — give yourself tim
     - A little thirsty
     - Very thirsty
 2. Export each as PNG at full resolution
-3. Experiment with [image2cpp](https://javl.github.io/image2cpp/) to understand how conversion works — no Arduino needed to explore the tool
+3. Experiment with [FileToCArray](https://notisrac.github.io/FileToCArray/) to understand how conversion works — no Arduino needed to explore the tool
 
 **Think about:**
 - How do you design expressions that are readable at 240×320px on a small screen?
@@ -153,17 +153,18 @@ This is where your 4 drawings become Arduino-compatible. You'll create images in
     - `thirsty.png`
     - `very_thirsty.png`
 
-2. Go to [image2cpp](https://javl.github.io/image2cpp/) and convert each PNG:
-    - Set canvas size to match your image dimensions
-    - Set color format to **RGB565 16-bit**
-    - Copy the generated C++ array
+2. Go to [FileToCArray](https://notisrac.github.io/FileToCArray/) and convert each PNG:
+    - Upload your PNG and set output dimensions to match (240×320)
+    - Set **Treat as: image**, **Code format: Arduino code (Adafruit GFX, TFT_eSPI)**, and **Color format: 16bit RGB (565)**
+    - Enable **PROGMEM** so the array is stored in flash memory
+    - Copy the generated `const uint16_t ... PROGMEM` array
 
-3. Paste each array into your sketch as a `const uint16_t` variable stored in `PROGMEM`
+3. Paste each array into your sketch
 4. Use `tft.drawRGBBitmap()` to display one image on screen
 5. Confirm it renders correctly before moving on
 
 **Read:**
-- [image2cpp tool](https://javl.github.io/image2cpp/)
+- [FileToCArray tool](https://notisrac.github.io/FileToCArray/) ([source on GitHub](https://github.com/notisrac/FileToCArray))
 - [Adafruit GFX — loading images](https://learn.adafruit.com/adafruit-gfx-graphics-library/loading-images)
 - [PROGMEM reference — storing data in flash memory](https://www.arduino.cc/reference/en/language/variables/utilities/progmem/)
 
@@ -211,7 +212,7 @@ Keep these bookmarked throughout the project.
 | [wokwi.com](https://wokwi.com) | Free in-browser Arduino simulator — no hardware needed |
 | [arduino.cc/reference](https://www.arduino.cc/reference/en/) | Complete Arduino function reference |
 | [Adafruit Learning System](https://learn.adafruit.com) | In-depth guides for Adafruit libraries |
-| [image2cpp](https://javl.github.io/image2cpp/) | Convert images to C++ arrays |
+| [FileToCArray](https://notisrac.github.io/FileToCArray/) | Convert color images to C++ arrays (RGB565) |
 | [forum.arduino.cc](https://forum.arduino.cc) | Community — someone has likely had your problem |
 | [r/arduino](https://www.reddit.com/r/arduino/) | Active and welcoming community |
 | [GitHub — arduino/arduino-examples](https://github.com/arduino/arduino-examples) | Official example sketches |
