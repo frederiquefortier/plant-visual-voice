@@ -70,6 +70,38 @@ Track future enhancements and feature ideas. Review this file during planning se
 - [ ] Deferred
 
 ---
+### 2026-05-15 - Automate Image Conversion at Build Time
+
+**Description:**
+- Run FileToCArray automatically as a pre-build script in PlatformIO
+- Converts PNG illustrations to C++ arrays without manual copy-paste
+
+**Motivation:**
+- Eliminates a manual step every time an illustration is updated
+- Keeps source PNG files as the single source of truth in the repo
+- Makes the project more reproducible for anyone who clones it
+
+**Potential Approach:**
+- Use PlatformIO's `extra_scripts` in `platformio.ini` to run a Python pre-build script
+- The script calls FileToCArray on each PNG in an `assets/` folder
+- Output C++ arrays are written to a generated `images.h` header file
+- Add generated files to `.gitignore` — only the PNGs get committed
+
+**Priority:**
+- [ ] High - Critical improvement
+- [ ] Medium - Nice to have
+- [x] Low - Future consideration
+
+**Dependencies:**
+- Project migrated to PlatformIO (VS Code)
+- .NET runtime installed on the build machine
+- [FileToCArray](https://github.com/notisrac/FileToCArray) installed and accessible via CLI
+
+**Status:**
+- [x] Proposed
+- [ ] In Progress
+- [ ] Completed
+- [ ] Deferred
 
 ### 2026-05-15 - Ambient Temperature & Humidity Sensor
 

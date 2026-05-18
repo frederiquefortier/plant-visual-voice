@@ -33,11 +33,62 @@ Track AI-assisted development sessions with summaries, successes, challenges, an
 
 <!-- Add new entries below this line, newest first -->
 
-# AI Session Records
+### 2026-05-17 - Sketch Architecture & State Management
 
-Track AI-assisted development sessions with summaries, successes, challenges, and friction points. Review this before similar sessions to learn from past experiences.
+**What We Worked On:**
+- Reviewed a sketch with threshold definitions and state management questions asked as inline comments
+- Discussed JSON vs struct for plant profiles
+- Identified the right tool for state tracking (enum vs #define vs string)
+- Established the init-to-worst-case + ascending if/else if pattern
 
----
+**What Went Well:**
+- Inline comment questions are an efficient review format — covers a lot of ground quickly
+- The logical pattern (init DYING, ascend through states) emerged naturally from the conversation
+- Student is already thinking about multi-plant architecture before it's needed
+
+**What Could We Do Better:**
+- Nothing notable
+
+**Friction Points:**
+- None
+
+**Key Takeaways:**
+- Inline comment questions in code are a great format to bring to AI sessions
+- Thinking about architecture early (profiles, state management) saves refactoring later
+
+**Questions Asked:**
+- Could thresholds and images be kept in a JSON per plant type?
+- Should I track the previous state to avoid redrawing on every loop?
+- Can an Arduino project have more than one file?
+- Should I have one file per plant or one file that groups all plant definitions?
+
+### 2026-05-17 - First Arduino Sketch Review
+
+**What We Worked On:**
+- Reviewed a first Arduino sketch reading a capacitive soil moisture sensor
+- Answered inline code questions and corrected a compilation error
+- Identified a Serial output formatting bug
+
+**What Went Well:**
+- Questions were asked directly in the code as comments — very efficient format
+- Covered 4 distinct concepts in one pass (pins, ADC, power sharing, constrain)
+
+**What Could We Do Better:**
+- Nothing notable — inline comment format is a great way to structure code reviews
+
+**Friction Points:**
+- None
+
+**Key Takeaways:**
+- Inline code comments are an effective way to ask questions during a session
+- One sketch review can cover a surprising amount of ground
+
+**Questions Asked:**
+- Why A0 and not another pin for the sensor?
+- Why 5V specifically — and is it a problem if the screen also uses 5V?
+- Where does 1023 come from in `map()`?
+- Is `constrain()` really necessary if `map()` already returns 0–100?
+- What is the 9600 value in `Serial.begin()` — baud rate or max bits per second?
 
 ### 2026-05-15 - Project Kickoff & Learning Plan
 

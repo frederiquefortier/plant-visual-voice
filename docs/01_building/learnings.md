@@ -2,7 +2,139 @@
 
 Document new concepts, techniques, and knowledge gained. Reference this file to build on past learning and find resources for deeper understanding.
 
+## Format
+
+### YYYY-MM-DD - Learning Title
+
+**What Was New:**
+- Core concept or technique learned
+- Context of when it came up
+
+**Key Points:**
+- Important details to remember
+- How it works or why it matters
+
+**Sources:**
+- Documentation links
+- Articles or tutorials referenced
+- Code examples or repositories
+
+**Where to Learn More:**
+- Advanced resources
+- Related topics to explore
+- Practice exercises or projects
+
+**Applied In:**
+- Where/how this was used in practice (optional)
+
 ---
+
+<!-- Add new entries below this line, newest first -->
+
+### 2026-05-17 - Project File Architecture for Multi-Plant Support
+
+**What Was New:**
+- Thinking about file structure as a scalability decision, not just an organization preference
+
+**Key Points:**
+- A folder-per-plant structure is the most extensible approach — each plant is self-contained
+- Recommended structure:
+  plants/
+  ├── monstera/
+  │   ├── profile.h    ← thresholds, name
+  │   └── images.h     ← 4 bitmaps
+  ├── cactus/
+  │   ├── profile.h
+  │   └── images.h
+- A single `plants.h` works for a small number of plants but becomes hard to navigate quickly
+- One file per plant at the root level is cleaner than one big file but less organized than folders
+- Choosing the right structure early avoids painful refactoring later
+
+**Where to Learn More:**
+- How does `#include` handle files in subfolders in Arduino/C++?
+- What is a forward declaration and when is it needed?
+
+**Applied In:**
+- plant-visual-voice project structure — organizing Monstera and future plant variants
+
+### 2026-05-17 - Multi-File Structure in Arduino Projects
+
+**What Was New:**
+- Splitting an Arduino project across multiple files instead of one monolithic `.ino`
+
+**Key Points:**
+- Arduino supports multiple files via tabs in the IDE — each tab is a file in the same folder
+- `.h` header files contain definitions (enums, structs, functions, bitmaps)
+- Files are included in the main `.ino` with `#include "filename.h"`
+- Recommended structure for this project:
+    - `plant-visual-voice.ino` — `setup()` and `loop()` only
+    - `states.h` — `enum State` and `getState()`
+    - `display.h` — all screen-related logic
+    - `images.h` — generated bitmap arrays
+
+**Sources:**
+- [Multiple files in Arduino — Arduino Docs](https://docs.arduino.cc/learn/programming/sketches/)
+
+**Where to Learn More:**
+- What is the difference between a `.h` and a `.cpp` file in C++?
+- When should a function definition live in a `.h` vs a `.cpp`?
+- What are include guards and why are they needed in header files?
+
+**Applied In:**
+- Project structure for plant-visual-voice — separating state logic, display logic, and bitmap assets
+
+### 2026-05-17 - Arduino State Management & Plant Profile Architecture
+
+**What Was New:**
+- Using enums to represent discrete states instead of strings or magic numbers
+- Understanding why JSON is not viable on Arduino and what replaces it
+
+**Key Points:**
+- `#define` is a compile-time constant — it cannot change at runtime; use variables for state
+- `enum` is the right tool for a fixed set of named states — safer and more readable than strings or integers
+- JSON parsing is too memory-intensive for Arduino; `struct` is the C++ equivalent for grouped data per plant profile
+- Function parameters must be explicitly typed in C++ — `getState(percentage)` is invalid, `getState(int percentage)` is correct
+
+**Sources:**
+- [enum reference — Arduino/C++](https://www.arduino.cc/reference/en/language/variables/data-types/enum/)
+- [struct reference — Arduino/C++](https://www.arduino.cc/reference/en/language/variables/compound-types/struct/)
+
+**Where to Learn More:**
+- How does `enum` compare to `const int` in C++?
+- When should you use a `struct` vs a class in C++?
+- What is a lookup table and when is it better than if/else chains?
+
+**Applied In:**
+- Module 2 — refactoring threshold logic and state management in the soil moisture sketch
+
+### 2026-05-17 - First Arduino Sketch — Soil Moisture Sensor
+
+**What Was New:**
+- Writing a first real Arduino sketch to read a capacitive soil moisture sensor
+- Understanding the difference between analog and digital pins
+- Using the Serial Monitor as a debugging tool
+
+**Key Points:**
+- `#define` creates an alias — the value must be a valid pin identifier like `A0`, not `5V`
+- Analog pins (A0–A5) read a variable voltage (0–5V); digital pins only read 0 or 1
+- The Arduino ADC is 10-bit: 2¹⁰ = 1024 possible values, so the max raw value is **1023**
+- Multiple components can share the 5V pin — what matters is total current draw (~500mA max via USB)
+- `map()` should stay within range in theory, but physical sensors can exceed 0 or 1023 in real conditions — `constrain()` is defensive best practice
+- `Serial.print()` stays on the same line; `Serial.println()` adds a line break — mix them to format output correctly
+
+**Sources:**
+- [analogRead() reference](https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/)
+- [Serial.print() reference](https://www.arduino.cc/reference/en/language/functions/communication/serial/print/)
+- [map() reference](https://www.arduino.cc/reference/en/language/functions/math/map/)
+- [constrain() reference](https://www.arduino.cc/reference/en/language/functions/math/constrain/)
+
+**Where to Learn More:**
+- What is an ADC (analog-to-digital converter) and how does it work?
+- What happens if total current draw exceeds the Arduino's limit?
+- Explore `Serial.print()` vs `Serial.println()` formatting patterns
+
+**Applied In:**
+- Module 2 — first sketch reading soil moisture sensor on A0 and printing to Serial Monitor
 
 ### 2026-05-15 - Building a Plant Humidity Sensor with Arduino
 
