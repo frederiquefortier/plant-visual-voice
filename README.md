@@ -83,6 +83,4 @@ See [`plan.md`](docs/00_briefing/plan.md) for the full learning roadmap and [`le
 
 ## A Note on AI Assistance
 
-This project was scoped and planned with the help of Claude (Anthropic). Claude helped me identify the right hardware, understand the learning path, and answer my questions along the way — but the learning, the wiring, and the code were mine to figure out.
-
-I wouldn't have known where to begin without it. That felt worth being transparent about.
+This project was scoped and planned with the help of Claude (Anthropic). Claude helped me identify the right hardware, understand the learning path, and answer my questions along the way — but the learning, the wiring, and the code were mine to figure out. You can see my process under [/docs](docs).

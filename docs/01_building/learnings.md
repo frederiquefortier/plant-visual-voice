@@ -31,6 +31,41 @@ Document new concepts, techniques, and knowledge gained. Reference this file to 
 
 <!-- Add new entries below this line, newest first -->
 
+### 2026-05-23 - C++ Structs, Nullability & File Includes in Arduino
+
+**What Was New:**
+- Translating TypeScript interfaces and optional properties to C++ structs
+- Using nullptr for optional pointer values in structs
+- Understanding include path behavior in Arduino IDE vs PlatformIO
+
+**Key Points:**
+- `struct` is the C++ equivalent of a TypeScript interface for grouped data
+- All fields in a C++ struct are mandatory — no optional properties like TypeScript's `?`
+- `nullptr` is the C++ equivalent of `null` — valid for pointer types like `uint16_t*`
+- Always check `if (ptr != nullptr)` before using a nullable pointer — no compiler protection in C++, crashes are your responsibility
+- Relative paths (`../`, `../../`) work in C++ includes but Arduino IDE is unreliable with deep relative paths
+- PlatformIO handles relative paths correctly — one more reason to migrate eventually
+- Safest structure with Arduino IDE: all `.h` files at root or one level deep maximum
+
+**Recommended file structure:**
+plant-visual-voice/
+├── plant-visual-voice.ino
+├── PlantProfile.h
+├── states.h
+├── display.h
+└── plants/
+    ├── monstera_images.h
+    └── cactus_images.h
+
+**Where to Learn More:**
+- What is the difference between a pointer and a value type in C++?
+- What happens at runtime when you dereference a nullptr?
+- How does PlatformIO resolve include paths differently than the Arduino IDE?
+
+**Applied In:**
+- moisture.h — MoistureThreshold struct with nullable number
+- plant-visual-voice project file structure
+
 ### 2026-05-17 - Project File Architecture for Multi-Plant Support
 
 **What Was New:**

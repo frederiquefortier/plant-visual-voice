@@ -33,17 +33,45 @@ Track AI-assisted development sessions with summaries, successes, challenges, an
 
 <!-- Add new entries below this line, newest first -->
 
+### 2026-05-23 - C++ Architecture & File Structure
+
+**What We Worked On:**
+- Defined `MoistureThreshold` and `PlantProfile` structs inspired by TypeScript interfaces
+- Discussed nullable pointers using `nullptr`
+- Clarified include path behavior in Arduino IDE vs PlatformIO
+- Established folder-per-plant file structure for scalability
+- Decided on `plantProfile.h` over `index.h` by C++ naming convention
+
+**What Went Well:**
+- TypeScript background translated naturally to C++ struct concepts
+- The "learn, don't receive code" contract was respected throughout
+
+**What Could We Do Better:**
+- Nothing notable
+
+**Friction Points:**
+- Arduino IDE has limitations with deep relative include paths that PlatformIO does not
+
+**Key Takeaways:**
+- Paste code with inline comment questions — it's the most efficient format for a review session
+- TypeScript knowledge is a strong foundation for C++ struct and type thinking
+- Architecture decisions (file structure, nullable pointers, threshold types) are worth making early
+
+**Questions Asked:**
+- Is a struct the right way to organize moisture threshold types (arid, temperate, humid)?
+- Can I use null values for optional image pointers in a C++ struct?
+- Do include paths work the same way in Arduino as usual?
+- By convention, should the struct file be called `index.h` or `plantProfile.h`?
+
 ### 2026-05-17 - Sketch Architecture & State Management
 
 **What We Worked On:**
 - Reviewed a sketch with threshold definitions and state management questions asked as inline comments
 - Discussed JSON vs struct for plant profiles
 - Identified the right tool for state tracking (enum vs #define vs string)
-- Established the init-to-worst-case + ascending if/else if pattern
 
 **What Went Well:**
 - Inline comment questions are an efficient review format — covers a lot of ground quickly
-- The logical pattern (init DYING, ascend through states) emerged naturally from the conversation
 - Student is already thinking about multi-plant architecture before it's needed
 
 **What Could We Do Better:**
@@ -89,6 +117,34 @@ Track AI-assisted development sessions with summaries, successes, challenges, an
 - Where does 1023 come from in `map()`?
 - Is `constrain()` really necessary if `map()` already returns 0–100?
 - What is the 9600 value in `Serial.begin()` — baud rate or max bits per second?
+
+### 2026-05-15 - Image Constraints & Display Research
+
+**What We Worked On:**
+- Discussed image sizing (48×64px) and ratio math for the 240×320 screen
+- Identified memory constraints on Arduino Uno (32 KB flash vs ~150 KB for a full RGB565 image)
+- Evaluated ESP32 as a future upgrade path
+- Discovered image2cpp is monochrome only — LVGL Image Converter is the correct tool for RGB565
+
+**What Went Well:**
+- Ratio and pixel math was caught and corrected collaboratively
+
+**What Could We Do Better:**
+- image2cpp was incorrectly recommended as supporting color — caught by the student
+- An incorrect ratio claim (3:4 for both screen and drawings) was made and had to be corrected
+
+**Friction Points:**
+- image2cpp color support was a source of confusion — LVGL Image Converter is the correct tool for RGB565
+
+**Key Takeaways:**
+- Always verify tool capabilities before recommending them (image2cpp = monochrome only)
+- Flag AI errors immediately when spotted — it keeps the learnings file accurate
+
+**Questions Asked:**
+- Could I use `display.fillScreen()` to handle the image size problem?
+- Should I have taken the ESP32 instead of the Arduino Uno?
+- What is the ratio of a 240×320 screen?
+- How many pixels do I need to add to my drawings to get a 3:4 ratio?
 
 ### 2026-05-15 - Project Kickoff & Learning Plan
 
