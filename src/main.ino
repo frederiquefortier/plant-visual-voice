@@ -1,11 +1,11 @@
-#include "states.h"
+#include "moisture.h"
 
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 320
 
 #define SOIL_MOISTURE_SENSOR A0
 
-State previousState = DYING;
+MoistureState previousMoistureState = DYING;
 
 void setup() {
   Serial.begin(9600);
@@ -22,11 +22,11 @@ void loop() {
   Serial.print(percentage);
   Serial.println("%");
 
-  State currentState = getState(percentage);
-  if (currentState != previousState) {
+  MoistureState currentMoistureState = getMoistureState(percentage);
+  if (currentMoistureState != previousMoistureState) {
     //do the display stuff
 
-    previousState = currentState;
+    previousMoistureState = currentMoistureState;
   }
 
   delay(1000);
