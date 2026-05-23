@@ -1,24 +1,44 @@
 # 🌱 Visual Plant Communication
 
-A soil moisture sensor that reads hydration levels and displays one of 4 status images on a color TFT screen — built with Arduino Uno.
-
-![Project photo](docs/04_results/demo.gif)
-> My Monstera is no longer at risk of dying!
+A soil moisture sensor that reads hydration levels and displays one of 4 hand-drawn status images on a color TFT screen — built with Arduino Uno, designed to support multiple plant types with their own moisture preferences and illustrations.
 
 ---
 
 ## How It Works
 
-The capacitive soil moisture sensor outputs an analog signal that the Arduino reads and converts into a humidity percentage. Based on four thresholds, the ILI9341 TFT screen displays a different image representing the plant's current state.
+The capacitive soil moisture sensor outputs an analog signal that the Arduino reads and maps to a humidity percentage. That percentage is compared against the active plant's thresholds to pick one of four moisture states. The ILI9341 TFT screen then displays the matching illustration for that plant.
 
-| State | Humidity |
+| State | Meaning |
 |---|---|
-| 💧 Overwatered | > 80% |
-| ✅ Perfect | 50–80% |
-| 🌤 A little thirsty | 20–50% |
-| 🔥 Very thirsty | < 20% |
+| 💧 `OVERWATER` | Too much water |
+| ✅ `PERFECT` | Happy plant |
+| 🌤 `THIRSTY` | Needs a drink soon |
+| 🔥 `DYING` | Critically dry |
 
-Every status image was hand-drawn on iPad using Procreate. The 4 states are designed as a reusable visual system. I've already illustrated two plant variants as of today, May 15, 2026.
+Thresholds are not global — each plant carries its own. The project ships with three reusable presets (`ARID`, `TEMPERATE`, `HUMID`) that plant profiles can pick from, so a cactus and a fern can share the same enum but trigger states at very different humidity levels.
+
+Every illustration is hand-drawn on iPad in Procreate. Each plant has its own folder with all four states, designed as a consistent visual system that scales as new plants are added.
+
+---
+
+## Project Structure
+
+```
+src/
+├── main.ino              # entry point — reads sensor, drives display
+├── moisture.h            # MoistureState enum + MoistureThreshold presets
+├── plants/
+│   ├── profile.h         # PlantProfile struct (name + thresholds + images)
+│   ├── monstera/
+│   │   ├── profile.h     # MONSTERA profile (TEMPERATE thresholds)
+│   │   └── images.h      # RGB565 bitmaps for the 4 states
+│   └── ...
+└── assets/               # source PNGs (240×320) per plant, per state
+    ├── monstera/
+    └── ...
+```
+
+Adding a new plant = create a folder under `plants/`, define a `PlantProfile`, drop the 4 PNGs into `assets/<plant>/`, and convert them to `images.h`.
 
 ---
 
@@ -60,27 +80,33 @@ Install via **Arduino IDE → Tools → Manage Libraries**.
 
 ---
 
-## What I Learned
+## Image Pipeline
+
+PNGs in `src/assets/<plant>/` are converted to RGB565 `PROGMEM` arrays using [FileToCArray](https://notisrac.github.io/FileToCArray/) and pasted into the plant's `images.h`. The 16-bit color format and flash storage are non-negotiable on the Uno — a full 24-bit 240×320 image wouldn't fit in 32 KB of flash.
+
+---
+
+## What I'm Learning
 
 This is a learning project — my first time working with:
 
 - SPI communication between Arduino and a TFT display
 - Analog sensor reading and value mapping (`analogRead`, `map`, `constrain`)
-- Bitmap image conversion to C++ arrays using [image2cpp](https://javl.github.io/image2cpp/)
-- Storing image data in flash memory with `PROGMEM`
-- Conditional display logic to avoid unnecessary screen redraws
+- Bitmap conversion to C++ arrays and storage in flash with `PROGMEM`
+- C++ structs and `enum`s, applied from a TypeScript background
+- Designing a scalable file structure for a hardware project
 - Version controlling a hardware project with Git
 
-See [`plan.md`](docs/00_briefing/plan.md) for the full learning roadmap and [`learnings.md`](docs/01_building/learnings.md) for notes taken along the way.
+See [`docs/00_briefing/plan.md`](docs/00_briefing/plan.md) for the full learning roadmap and [`docs/01_building/learnings.md`](docs/01_building/learnings.md) for notes taken along the way.
 
 ---
 
 ## Project Status
 
-🚧 In progress — currently on Module 0 (waiting for all the components to arrive :)).
+🚧 In progress — code architecture and illustrations for Monstera and Sunflower are in place. Currently on Module 0, waiting for hardware to arrive before wiring and the first real sensor readings.
 
---- 
+---
 
 ## A Note on AI Assistance
 
-This project was scoped and planned with the help of Claude (Anthropic). Claude helped me identify the right hardware, understand the learning path, and answer my questions along the way — but the learning, the wiring, and the code were mine to figure out. You can see my process under [/docs](docs).
+This project was scoped and planned with the help of Claude (Anthropic). Claude helped me identify the right hardware, understand the learning path, and answer my questions along the way — but the learning, the wiring, and the code were mine to figure out. You can see my process under [docs](docs).
