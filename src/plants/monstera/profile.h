@@ -4,8 +4,8 @@
 const PlantProfile MONSTERA = {
     "Monstera",
     TEMPERATE,
-    nullpr,
-    nullpr,
-    nullpr,
-    nullpr
-}
+    nullptr,
+    nullptr,
+    nullptr,
+    nullptr
+};
