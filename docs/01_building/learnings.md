@@ -31,6 +31,23 @@ Document new concepts, techniques, and knowledge gained. Reference this file to 
 
 <!-- Add new entries below this line, newest first -->
 
+### 2026-06-26 - Material Shopping Mistakes: Breadboard, Cables & Sensor Wiring
+
+**What Was New:**
+- Looking back at the materials I bought (partly with Claude's help) and noting where the list was off
+
+**Key Points:**
+- **No breadboard needed.** When I asked for help speccing the materials, I came away thinking I needed a breadboard. For this build I didn't — the components connect directly to the Uno header pins with Dupont cables.
+- **Too much cable — that one's on me.** I over-ordered cable. The Uno already comes with cable in the box, so the extra was redundant.
+- **Sensor leads come joined and are fiddly to separate.** The capacitive sensor's Dupont leads arrive stuck together as a ribbon. To place each lead on its correct Uno pin (VCC, GND, AOUT→A0) they have to be peeled apart and routed individually — and peeling them cleanly is trickier than expected. Next time I should buy leads that come already separated to avoid the hassle.
+
+**Where to Learn More:**
+- Which Arduino projects genuinely need a breadboard vs. direct header wiring?
+- How to read a sensor's pinout (VCC / GND / signal) and match it to the Uno's pins
+
+**Applied In:**
+- plant-visual-voice hardware setup — correcting the materials list and wiring the soil moisture sensor
+
 ### 2026-05-23 - C++ Structs, Nullability & File Includes in Arduino
 
 **What Was New:**
