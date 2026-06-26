@@ -1,4 +1,4 @@
-# 🌱 Visual Plant Communication
+# 🌱 Plant Visual Voice
 
 An Arduino Uno reads a capacitive soil moisture sensor and displays hand-drawn illustrations on a color TFT screen to communicate plant health at a glance. It's designed around data-driven plant profiles, allowing each species to define its own moisture thresholds and artwork.
 

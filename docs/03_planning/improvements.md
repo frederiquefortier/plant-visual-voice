@@ -37,6 +37,41 @@ Track future enhancements and feature ideas. Review this file during planning se
 
 <!-- Add new entries below this line, newest first -->
 
+### 2026-06-26 - Phone Notification When a Plant Is Thirsty or Dying
+
+**Description:**
+- Push a notification to the user's phone when a plant enters the THIRSTY or DYING state
+- Possibly a companion app that shows the current state and history
+
+**Motivation:**
+- The on-screen illustration only helps when someone is looking at the device
+- A push notification reaches the user when they are away, so the plant gets watered before it reaches DYING
+- DYING and THIRSTY are the states that actually need action, so they are the ones worth alerting on
+
+**Potential Approach:**
+- The Arduino Uno has no networking, so this needs WiFi. Either move to an ESP32 or add a WiFi module
+- Send the state change to a push service (e.g. ntfy, Pushover, or Firebase Cloud Messaging) over HTTP
+- Only send on a state transition into THIRSTY/DYING, not on every loop, to avoid spamming
+- A dedicated app is more work than a hosted push service. Start with ntfy/Pushover and only build an app if the project needs richer history or multiple devices
+
+**Priority:**
+- [ ] High - Critical improvement
+- [x] Medium - Nice to have
+- [ ] Low - Future consideration
+
+**Dependencies:**
+- WiFi-capable board (ESP32) or a WiFi module for the Uno
+- State-transition tracking in the main loop (only fire on entering a new state)
+- An account/topic on whichever push service is chosen
+
+**Status:**
+- [x] Proposed
+- [ ] In Progress
+- [ ] Completed
+- [ ] Deferred
+
+---
+
 ### 2026-05-15 - Per-Plant Humidity Thresholds
 
 **Description:**
